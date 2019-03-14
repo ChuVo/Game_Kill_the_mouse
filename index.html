@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cath the mouse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/fonts.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+</head>
+<body>
+    <main class="main">
+        <div class="header">
+            <div class="board">
+                <div class="board__lives lives">
+                    <div class="lives__heart-wrapper">
+                        <div class="lives__heart"></div>
+                        <div class="lives__heart"></div>
+                        <div class="lives__heart"></div>
+                    </div>                
+                </div>            
+                <div class="board__score score">
+                    <div class="score__value">0</div>
+                </div>
+                <div class="board__speed speed">1</div>            
+            </div>
+            <div class="main__buttons buttons">
+                <button class="button button--start">Начать</button>
+                <button class="button button--guide">?</button>
+            </div>
+        </div>
+        <div class="main__field field">
+            <div class="filed__wrapper-holes">
+                <div class="field__hole">
+                    <div class="field__animal"></div>
+                </div>
+                <div class="field__hole">
+                    <div class="field__animal"></div>
+                </div>
+                <div class="field__hole">
+                    <div class="field__animal"></div>
+                </div>
+                <div class="field__hole">
+                    <div class="field__animal"></div>
+                </div>
+                <div class="field__hole">
+                    <div class="field__animal"></div>
+                </div>
+            </div>            
+        </div>        
+    </main>
+    <div class="modal modal--guide modal--invisible">
+        <h2 class="modal__title">Правила игры</h2>
+        <p class="modal__name">1.   В одной из 5-ти норок в случайном порядке периодически появляется мышь 🐭и другие emoji 🐭🐼🐻🦊🐱🐱...</p>
+        <p class="modal__name">2.   Нужно поймать мышь. При клике по мыши игроку добавляется +10 очков.</p>
+        <p class="modal__name">3.   После каждой пятой пойманной мыши скорость её случайного появления увеличивается.</p>
+        <p class="modal__name">4.   Если клик был выполнен по другому emoji, то у игрока отнимается жизнь. Всего 3 жизни. Если жизни закончились, то игра останавливается.</p>
+        <button class="modal__button button button--ok">OK</button>
+    </div>
+    <div class="modal modal--invisible">
+        <h2 class="modal__title">ИГРА ЗАВЕРШЕНА</h2>
+        <p class="end-game__score">Поздравляем! Вы набрали:</p>
+        <p class="end-game__value">512</p>
+        <p class="end-game__value-subtitle">очков!</p>
+        <button class="modal__button button button--ok">OK</button>
+    </div>       
+    <script src="js/script.js"></script>
+</body>
+</html>

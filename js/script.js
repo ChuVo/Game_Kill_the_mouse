@@ -45,27 +45,25 @@ class Game {
     currentHole.innerHTML = this.ANIMAL;  
     
     this.HOLE = currentHole;
-    
-    setTimeout( () => {
-      currentHole.classList.remove( 'field__animal--create' );
-      currentHole.innerHTML = '';
-    }, this.speed*0.9 );
 
-    clickOnAnimals = () => {
+    clickOnAnimals = () => {      
+      this.HOLE.classList.add('field__animal--blood');
+      
           if ( this.HOLE.innerHTML !== '🐭') {        
             console.log( 'Жаба! ' + this.ANIMAL );
           } else {        
             console.log( 'Ура! Мышь! ' + this.ANIMAL );
           }
-    
-          this.HOLE.removeEventListener( 'click', clickOnAnimals, false );
-          this.HOLE.classList.add('field__animal--blood');
-          
       }
 
-      this.HOLE.addEventListener( 'click', clickOnAnimals, false  );
+      this.HOLE.addEventListener( 'click', clickOnAnimals  );
       this.HOLE.classList.remove('field__animal--blood');
-          
+
+      setTimeout( () => {
+        this.HOLE.removeEventListener( 'click', clickOnAnimals, false );
+      currentHole.classList.remove( 'field__animal--create' );
+      currentHole.innerHTML = '';
+    }, this.speed*0.9 );    
   }
 
   gameInterval() {

@@ -59,7 +59,7 @@ body {
   margin-right: .6rem;
 }
 
-.lives__heart--fill {
+.lives__heart--empty {
   background-image: url(../img/heart-empty.svg);
 }
 
@@ -187,6 +187,7 @@ body {
 
 .field__animal--create {
   transform: translateY(-30%);
+  text-shadow: 0 .5rem 2rem rgb(47, 51, 31);
 }
 
 .modal {

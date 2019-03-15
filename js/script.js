@@ -1,28 +1,23 @@
-const startButton = document.querySelector( '.button--start' ),
-      guide = document.querySelector('.modal--guide'),
+const guide = document.querySelector('.modal--guide'),
       guideButton = document.querySelector('.button--guide'),
-      okButton = document.querySelector('.button--ok');
+      okButton = document.querySelector('.button--ok'),
+      startButton = document.querySelector( '.button--start' );
 
-'use strict';
-
+'use strict'
 class Game {
   constructor ( score, lives, isRunning, isMouse ) {
-    this.animals = ['🐭', '🐼', '🐻', '🦊', '🐱', '🐮', '🦁', '🐽', '🐨', '🐰', '🐯'];
-    this.hearts = document.querySelectorAll( '.lives__heart' );
+    this.animals = [ '🐼', '🐻', '🦊', '🐱', '🐮', '🐭', '🦁', '🐽', '🐨', '🐰', '🐯'];
+    this.hearts = document.querySelector('.lives__heart');
     this.isMouse = false;
     this.isRunning = false;
     this.score = 0;
     this.lives = 3;
     this.speed = 1500;
-       
 
     this.holes = document.querySelectorAll( '.field__animal' );
     this.HOLE = undefined;
     this.ANIMAL = undefined;
-
   }
-
-  
 
   randomAnimal() {
     let indexAnimal = Math.floor( Math.random() * this.animals.length ),
@@ -35,45 +30,56 @@ class Game {
     let indexHole = Math.floor( Math.random() * this.holes.length ),
         randomHole = this.holes[indexHole];
 
-        this.HOLE = randomHole;
-
     return randomHole;
   }
 
   creatingAnimals() {
     let currentHole = this.randomHole();
-        this.ANIMAL = this.randomAnimal();
-        
+
+    this.ANIMAL = this.randomAnimal();        
     currentHole.classList.add( 'field__animal--create' );
-    currentHole.innerHTML = this.ANIMAL;    
+    currentHole.innerHTML = this.ANIMAL;  
+    
+    this.HOLE = currentHole;
     
     setTimeout( () => {
       currentHole.classList.remove( 'field__animal--create' );
       currentHole.innerHTML = '';
     }, this.speed*0.9 );
 
-  this.clickOnAnimals();
-    
   }
 
   clickOnAnimals() {
-    this.HOLE.addEventListener( 'click', () => {
 
-      if ( this.HOLE.innerHTML === '🐭') {
-        console.log( 'Ура! Мышь! ' + this.ANIMAL );
-      } else {
+      if ( this.HOLE.innerHTML !== '🐭') {        
         console.log( 'Жаба! ' + this.ANIMAL );
+      } else {        
+        console.log( 'Ура! Мышь! ' + this.ANIMAL );
       }
-    })
+
+      this.HOLE.removeEventListener( 'click', () => {
+        console.log( 'запуск clickOnAnimals()' );
+        this.clickOnAnimals();
+      } );
+
+      console.log('событие снято');
+
   }
 
   gameInterval() {
     setInterval( () => {
       this.creatingAnimals();
-    }, this.speed );
+
+      this.HOLE.addEventListener( 'click', () => {
+        console.log( 'запуск clickOnAnimals()' );
+        this.clickOnAnimals();
+      } );
+
+    }, this.speed );    
   }
 
   chanceMouse() {
+    this.animals.unshift = ( '🐭');
     this.animals.push = ('🐭');
   }
 

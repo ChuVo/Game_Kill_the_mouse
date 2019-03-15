@@ -3,10 +3,12 @@ const guide = document.querySelector('.modal--guide'),
       okButton = document.querySelector('.button--ok'),
       startButton = document.querySelector( '.button--start' );
 
+      let c;
+
 'use strict'
 class Game {
   constructor ( score, lives, isRunning, isMouse ) {
-    this.animals = [ '🐼', '🐻', '🦊', '🐱', '🐮', '🐭', '🦁', '🐽', '🐨', '🐰', '🐯'];
+    this.animals = [ '🐭', '🐼', '🐻', '🦊', '🐱', '🐮', '🐭', '🦁', '🐽', '🐨', '🐰', '🐯', '🐭' ];
     this.hearts = document.querySelector('.lives__heart');
     this.isMouse = false;
     this.isRunning = false;
@@ -34,10 +36,12 @@ class Game {
   }
 
   creatingAnimals() {
-    let currentHole = this.randomHole();
+    let currentHole = this.randomHole(),
+        clickOnAnimals = undefined;
 
     this.ANIMAL = this.randomAnimal();        
     currentHole.classList.add( 'field__animal--create' );
+    
     currentHole.innerHTML = this.ANIMAL;  
     
     this.HOLE = currentHole;
@@ -47,45 +51,31 @@ class Game {
       currentHole.innerHTML = '';
     }, this.speed*0.9 );
 
-  }
-
-  clickOnAnimals() {
-
-      if ( this.HOLE.innerHTML !== '🐭') {        
-        console.log( 'Жаба! ' + this.ANIMAL );
-      } else {        
-        console.log( 'Ура! Мышь! ' + this.ANIMAL );
+    clickOnAnimals = () => {
+          if ( this.HOLE.innerHTML !== '🐭') {        
+            console.log( 'Жаба! ' + this.ANIMAL );
+          } else {        
+            console.log( 'Ура! Мышь! ' + this.ANIMAL );
+          }
+    
+          this.HOLE.removeEventListener( 'click', clickOnAnimals, false );
+          this.HOLE.classList.add('field__animal--blood');
+          
       }
 
-      this.HOLE.removeEventListener( 'click', () => {
-        console.log( 'запуск clickOnAnimals()' );
-        this.clickOnAnimals();
-      } );
-
-      console.log('событие снято');
-
+      this.HOLE.addEventListener( 'click', clickOnAnimals, false  );
+      this.HOLE.classList.remove('field__animal--blood');
+          
   }
 
   gameInterval() {
     setInterval( () => {
       this.creatingAnimals();
-
-      this.HOLE.addEventListener( 'click', () => {
-        console.log( 'запуск clickOnAnimals()' );
-        this.clickOnAnimals();
-      } );
-
     }, this.speed );    
-  }
-
-  chanceMouse() {
-    this.animals.unshift = ( '🐭');
-    this.animals.push = ('🐭');
   }
 
   startGame() {
     this.gameInterval();
-    this.chanceMouse();
   }
 }
 
@@ -107,4 +97,3 @@ function showGuide() {
 function closeModal() {
   guide.classList.add( 'modal--invisible' );
 }
-

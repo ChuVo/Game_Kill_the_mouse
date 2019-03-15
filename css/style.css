@@ -180,6 +180,7 @@ body {
 }
 
 .field__animal {
+  background-image: none;
   font-size: 12rem;
   cursor: pointer;
   transition: .3s;
@@ -188,6 +189,11 @@ body {
 .field__animal--create {
   transform: translateY(-30%);
   text-shadow: 0 .5rem 2rem rgb(47, 51, 31);
+}
+
+.field__animal--blood {
+  background-image: url('../img/blood.png');
+  background-size: cover;
 }
 
 .modal {

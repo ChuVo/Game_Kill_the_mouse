@@ -1,4 +1,4 @@
-const gameTotal = document.querySelector('.modal--game-over'),
+const gameTotal = document.querySelector('.modal--total'),
       guide = document.querySelector('.modal--guide'),
       guideButton = document.querySelector('.button--guide'),
       level = document.querySelector('.level__value'),
@@ -7,23 +7,22 @@ const gameTotal = document.querySelector('.modal--game-over'),
       startButton = document.querySelector( '.button--start' );
 
 let heartIndex = 0;
-      
 
 'use strict'
 class Game {
   constructor () {
+    this.ANIMAL = undefined;
     this.animals = [ '🐭', '🐼', '🐻', '🦊', '🐱', '🐮', '🐭', '🦁', '🐽', '🐨', '🐰', '🐯', '🐭' ];
-    this.hearts = document.querySelectorAll('.lives__heart');
+    this.cycleGame = undefined;
+    this.hearts = document.querySelectorAll( '.lives__heart' );
+    this.HOLE = undefined;
+    this.holes = document.querySelectorAll( '.field__animal' );
     this.isMouse = false;
     this.isRunning = false;
     this.levelValue = 1;
     this.lives = 3;
     this.scoreValue = 0;
     this.speed = 1500;
-
-    this.holes = document.querySelectorAll( '.field__animal' );
-    this.HOLE = undefined;
-    this.ANIMAL = undefined;
   }
 
   levelUp() {
@@ -52,7 +51,10 @@ class Game {
     heartIndex++;  
     
     if (this.lives === 0) {
-      gameOver();
+
+      this.isRunning = false;
+      this.showTotal();
+      this.stopGame();
     }
   }
 
@@ -105,15 +107,32 @@ class Game {
   }
 
   gameInterval() {
-    setInterval( () => {
+    this.cycleGame = setInterval( () => {
       this.creatingAnimals();
-    }, this.speed );    
+    }, this.speed );
   }
 
   startGame() {
     this.gameInterval();
 
     startAnimation();
+  }
+
+  stopGame() {
+    if ( this.isRunning === false ) {
+      clearInterval( this.cycleGame );console.log('clearInterval; Runing-' + this.isRunning );
+    }
+    startButton.addEventListener( 'click', startGame );
+  }
+
+  printScore() {
+    let scoreTotal = document.querySelector('.end-game__value');
+    scoreTotal.innerHTML = this.scoreValue;
+  }
+  
+  showTotal() {
+    this.printScore();
+    gameTotal.classList.remove( 'modal--invisible' );
   }
 }
 
@@ -126,9 +145,7 @@ function closeModal() {
   guide.classList.add( 'modal--invisible' );
 }
 
-function gameOver() {
-  gameTotal.classList.remove( 'modal--invisible' );
-}
+
 
 function showGuide() {
   guide.classList.remove( 'modal--invisible' );
@@ -136,7 +153,7 @@ function showGuide() {
 
 function startGame() {
   let game = new Game;
-
+  
   game.startGame();
   startButton.removeEventListener( 'click', startGame, false );
 }

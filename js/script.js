@@ -106,12 +106,14 @@ class Game {
       this.HOLE.classList.add('field__animal--blood');
       
           if ( this.HOLE.innerHTML !== '🐭') {
-            
             this.deleteHeart();
-            console.log( 'Жаба! ' + this.ANIMAL );
-          } else {
+          }
+          if ( this.HOLE.innerHTML === '🐱') {
+            console.log('cat')
+            meow();
+          }
+           else {
             this.scoreUp();
-            console.log( 'Ура! Мышь! ' + this.ANIMAL );
           }
       }
 
@@ -204,4 +206,8 @@ startButton.addEventListener( 'click', play );
 
 function play() {
   document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/click.mp3" type="audio/mpeg"/></audio>';
+}
+
+function meow() {
+  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/meou.mp3" type="audio/mpeg"/></audio>';
 }

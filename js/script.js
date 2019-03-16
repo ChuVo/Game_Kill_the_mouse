@@ -1,9 +1,10 @@
-const gameTotal = document.querySelector('.modal--total'),
-      guide = document.querySelector('.modal--guide'),
-      guideButton = document.querySelector('.button--guide'),
-      level = document.querySelector('.level__value'),
-      okButton = document.querySelectorAll('.button--ok'),
-      score = document.querySelector('.score__value'),
+const gameTotal = document.querySelector( '.modal--total' ),
+      guide = document.querySelector( '.modal--guide' ),
+      guideButton = document.querySelector( '.button--guide' ),
+      level = document.querySelector( '.level__value' ),
+      okButton = document.querySelectorAll( '.button--ok' ),
+      okButtonTotal = document.querySelector( '.button--ok-total' ),
+      score = document.querySelector( '.score__value' ),
       startButton = document.querySelector( '.button--start' );
 
 let heartIndex = 0;
@@ -25,35 +26,48 @@ class Game {
     this.speed = 1500;
   }
 
-  levelUp() {
-    this.levelValue ++;
+  levelPrint() {
     level.innerHTML = this.levelValue;
-    console.log('level UP ' + this.levelValue);
-    this.speed -= 100;
   }
 
+  levelUp() {
+    this.levelValue ++;
+    this.levelPrint();
+    console.log('level UP ' + this.levelValue);
+    this.speed -= 200;
+  }
+  
   scorePrint() {
-    this.scoreValue = this.scoreValue + 10 ;
     score.innerHTML = this.scoreValue;
+  }
+
+  scoreUp() {
+    this.scoreValue = this.scoreValue + 10 ;
+    this.scorePrint();
     
     level.classList.remove('level--animation');
 
     if ( this.scoreValue % 50 === 0 ) {
       this.levelUp();
       
-      startAnimation();
+      levelAnimation();
     }
   }
 
+  livesPrint() {
+    this.hearts[heartIndex].classList.add( 'lives__heart--empty' );
+  }  
+
   deleteHeart() {
     this.lives--;
-    this.hearts[heartIndex].classList.add( 'lives__heart--empty' );
+    this.livesPrint();
     heartIndex++;  
     
     if (this.lives === 0) {
 
       this.isRunning = false;
       this.showTotal();
+      this.reset();
       this.stopGame();
     }
   }
@@ -91,7 +105,7 @@ class Game {
             this.deleteHeart();
             console.log( 'Жаба! ' + this.ANIMAL );
           } else {
-            this.scorePrint();
+            this.scoreUp();
             console.log( 'Ура! Мышь! ' + this.ANIMAL );
           }
       }
@@ -113,9 +127,20 @@ class Game {
   }
 
   startGame() {
-    this.gameInterval();
 
-    startAnimation();
+    levelAnimation();
+    this.gameInterval();
+  }
+
+  reset() {
+    okButtonTotal.addEventListener('click', () => {
+      
+      heartIndex = 0;
+      this.levelValue = 1;  this.levelPrint();
+      this.lives = 3;       this.hearts.forEach( (i) => i.classList.remove( 'lives__heart--empty' ) );
+      this.scoreValue = 0;  this.scorePrint();
+      this.speed = 1500;
+    });
   }
 
   stopGame() {
@@ -127,6 +152,7 @@ class Game {
 
   printScore() {
     let scoreTotal = document.querySelector('.end-game__value');
+
     scoreTotal.innerHTML = this.scoreValue;
   }
   
@@ -145,8 +171,6 @@ function closeModal() {
   guide.classList.add( 'modal--invisible' );
 }
 
-
-
 function showGuide() {
   guide.classList.remove( 'modal--invisible' );
 }
@@ -158,7 +182,7 @@ function startGame() {
   startButton.removeEventListener( 'click', startGame, false );
 }
 
-function startAnimation() {
+function levelAnimation() {
   level.classList.add('level--animation');
 }
 

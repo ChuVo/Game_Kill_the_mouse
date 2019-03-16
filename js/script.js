@@ -1,15 +1,19 @@
-const guide = document.querySelector('.modal--guide'),
+const gameTotal = document.querySelector('.modal--game-over'),
+      guide = document.querySelector('.modal--guide'),
       guideButton = document.querySelector('.button--guide'),
       level = document.querySelector('.level__value'),
-      okButton = document.querySelector('.button--ok'),
+      okButton = document.querySelectorAll('.button--ok'),
       score = document.querySelector('.score__value'),
       startButton = document.querySelector( '.button--start' );
+
+let heartIndex = 0;
+      
 
 'use strict'
 class Game {
   constructor () {
     this.animals = [ '🐭', '🐼', '🐻', '🦊', '🐱', '🐮', '🐭', '🦁', '🐽', '🐨', '🐰', '🐯', '🐭' ];
-    this.hearts = document.querySelector('.lives__heart');
+    this.hearts = document.querySelectorAll('.lives__heart');
     this.isMouse = false;
     this.isRunning = false;
     this.levelValue = 1;
@@ -27,21 +31,28 @@ class Game {
     level.innerHTML = this.levelValue;
     console.log('level UP ' + this.levelValue);
     this.speed -= 100;
-
-    
   }
 
   scorePrint() {
     this.scoreValue = this.scoreValue + 10 ;
     score.innerHTML = this.scoreValue;
-    console.log( 'score = ' + this.scoreValue);
-
+    
     level.classList.remove('level--animation');
 
     if ( this.scoreValue % 50 === 0 ) {
       this.levelUp();
       
       startAnimation();
+    }
+  }
+
+  deleteHeart() {
+    this.lives--;
+    this.hearts[heartIndex].classList.add( 'lives__heart--empty' );
+    heartIndex++;  
+    
+    if (this.lives === 0) {
+      gameOver();
     }
   }
 
@@ -73,7 +84,9 @@ class Game {
     clickOnAnimals = () => {      
       this.HOLE.classList.add('field__animal--blood');
       
-          if ( this.HOLE.innerHTML !== '🐭') {            
+          if ( this.HOLE.innerHTML !== '🐭') {
+            
+            this.deleteHeart();
             console.log( 'Жаба! ' + this.ANIMAL );
           } else {
             this.scorePrint();
@@ -105,8 +118,21 @@ class Game {
 }
 
 guideButton.addEventListener( 'click', showGuide );
-okButton.addEventListener( 'click', closeModal );
+okButton.forEach( (i) => i.addEventListener( 'click', closeModal )) ;
 startButton.addEventListener( 'click', startGame );
+
+function closeModal() {
+  gameTotal.classList.add( 'modal--invisible' );
+  guide.classList.add( 'modal--invisible' );
+}
+
+function gameOver() {
+  gameTotal.classList.remove( 'modal--invisible' );
+}
+
+function showGuide() {
+  guide.classList.remove( 'modal--invisible' );
+}
 
 function startGame() {
   let game = new Game;
@@ -115,15 +141,7 @@ function startGame() {
   startButton.removeEventListener( 'click', startGame, false );
 }
 
-function showGuide() {
-  guide.classList.remove( 'modal--invisible' );
-}
-
-function closeModal() {
-  guide.classList.add( 'modal--invisible' );
-}
-
 function startAnimation() {
   level.classList.add('level--animation');
-  console.log('start-animation')
 }
+

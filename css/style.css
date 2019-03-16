@@ -425,6 +425,15 @@ and (orientation: portrait) {
     width: 60rem;
   }
 
+  .field__hole {
+    height: 10.8rem;
+    width: 1.5rem;
+  }
+
+  .field__animal--create {
+    font-size: 4rem;
+  }
+
   .field__hole:nth-child(3) {
     margin-right: 42%;
     transform: translateX(80%);
@@ -450,7 +459,7 @@ and (orientation: landscape) {
 
   .modal__button {
     bottom: 3%;
-}
+  }
 }
 
 @media screen and (max-width: 360px) {

@@ -9,6 +9,8 @@ const gameTotal = document.querySelector( '.modal--total' ),
 
 let heartIndex = 0;
 
+widthScreen();
+
 'use strict'
 class Game {
   constructor () {
@@ -148,6 +150,7 @@ class Game {
       clearInterval( this.cycleGame );console.log('clearInterval; Runing-' + this.isRunning );
     }
     startButton.addEventListener( 'click', startGame );
+    level.classList.remove('level--animation');
   }
 
   printScore() {
@@ -177,12 +180,18 @@ function showGuide() {
 
 function startGame() {
   let game = new Game;
-  
+
   game.startGame();
   startButton.removeEventListener( 'click', startGame, false );
 }
 
 function levelAnimation() {
   level.classList.add('level--animation');
+}
+
+function widthScreen() {
+  if ( document.documentElement.clientWidth <= 850 ) {
+    startButton.innerHTML = '<div class="play"></div>';
+  }
 }
 

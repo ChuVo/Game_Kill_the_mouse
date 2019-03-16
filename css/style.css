@@ -48,7 +48,7 @@ body {
   display: flex;
   justify-content: center;
   height: 100%;
-  transform: translateX(4rem);
+  transform: translate(4rem, 5%);
 }
 
 .lives__heart {
@@ -72,7 +72,7 @@ body {
   font-size: 3.5rem;
   height: 4.9rem;
   text-align: right;
-  line-height: 4.7rem;
+  line-height: 5.2rem;
   width: 20.7rem;  
 }
 
@@ -299,6 +299,19 @@ font-size: 7rem;
   display: none;
 }
 
+.play {
+  border: 1.5rem solid transparent;
+  border-left: 2.7rem solid #27A8F3;
+  text-align: center;
+  margin: 0 auto;
+  display: inline-block;
+  transform: translate(28%, 5%);
+}
+
+.play:hover {
+  border-left: 2.7rem solid #fff;
+}
+
 @media screen and (max-width: 1024px) {
   html {
     font-size: 8px;
@@ -336,8 +349,7 @@ font-size: 7rem;
   }
 
   .button--start {
-    display: block;
-    margin: 0;
+    width: 7rem;
   }
 }
 
@@ -372,7 +384,7 @@ and (orientation: portrait) {
 
 @media screen and (max-width: 600px) {
   html {
-    font-size: 5px;
+    /* font-size: 5px; */
   }
 }
 

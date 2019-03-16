@@ -312,6 +312,21 @@ font-size: 7rem;
   border-left: 2.7rem solid #fff;
 }
 
+.player {
+  opacity: .5;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.sound-button {
+  position: absolute;
+}
+
+.click-button {
+  position: absolute;
+}
+
 @media screen and (max-width: 1024px) {
   html {
     font-size: 8px;
@@ -380,12 +395,6 @@ and (orientation: portrait) {
      transform: translateX(40%);
    }
 
-}
-
-@media screen and (max-width: 600px) {
-  html {
-    /* font-size: 5px; */
-  }
 }
 
   @media screen and (max-width: 600px)

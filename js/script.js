@@ -1,4 +1,5 @@
-const gameTotal = document.querySelector( '.modal--total' ),
+const audio=document.querySelector("audio"),
+      gameTotal = document.querySelector( '.modal--total' ),
       guide = document.querySelector( '.modal--guide' ),
       guideButton = document.querySelector( '.button--guide' ),
       level = document.querySelector( '.level__value' ),
@@ -10,6 +11,8 @@ const gameTotal = document.querySelector( '.modal--total' ),
 let heartIndex = 0;
 
 widthScreen();
+audio.volume = 0.2;//level sound
+audio.classList.add('player');
 
 'use strict'
 class Game {
@@ -195,3 +198,10 @@ function widthScreen() {
   }
 }
 
+guideButton.addEventListener( 'click', play );
+okButton.forEach( (i) => i.addEventListener('click', play) );
+startButton.addEventListener( 'click', play );
+
+function play() {
+  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/click.mp3" type="audio/mpeg"/></audio>';
+}

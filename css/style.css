@@ -59,7 +59,7 @@ body {
   margin-right: .6rem;
 }
 
-.lives__heart--fill {
+.lives__heart--empty {
   background-image: url(../img/heart-empty.svg);
 }
 
@@ -86,7 +86,7 @@ body {
   transform: translateX(-3rem);
 }
 
-.speed {
+.level {
   align-items: center;
   background: url(../img/star.svg)  center no-repeat #fff;
   background-size: 50%;
@@ -96,13 +96,57 @@ body {
   justify-content: center;
   font-size: 2.4rem;
   height: 13.6rem;
+  text-shadow: 0 0 2px rgb(14, 0, 90);
   width: 13.6rem;
 }
 
-.board__speed {
+.board__level {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+.level--animation {
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+  animation-name: start-animation;
+}
+
+@keyframes start-animation {
+  from {
+    font-size: 20rem;
+    font-style: italic;
+    transform: translate(40vw, 40vh);
+    z-index: 999;
+  }
+
+  15% {
+    font-size: 35rem;
+  }
+
+  30% {
+    font-size: 20rem;
+  }
+
+  45% {
+    font-size: 35rem;
+  }
+
+  60% {
+    font-size: 20rem;
+  }
+
+  75% {
+    font-size: 35rem;
+    transform: translate(40vw, 40vh);
+  }
+
+  to {
+  font-style: italic;
+  transform: translate(0);
+  z-index: 999;
+  }
 }
 
 .main__buttons {
@@ -187,6 +231,12 @@ body {
 
 .field__animal--create {
   transform: translateY(-30%);
+  text-shadow: 0 .5rem 2rem rgb(47, 51, 31);
+}
+
+.field__animal--blood {
+  background-image: url('../img/blood.png');
+  background-size: cover;
 }
 
 .modal {

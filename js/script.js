@@ -1,106 +1,129 @@
-const startButton = document.querySelector( '.button--start' ),
-      guide = document.querySelector('.modal--guide'),
+const guide = document.querySelector('.modal--guide'),
       guideButton = document.querySelector('.button--guide'),
-      okButton = document.querySelector('.button--ok');
+      level = document.querySelector('.level__value'),
+      okButton = document.querySelector('.button--ok'),
+      score = document.querySelector('.score__value'),
+      startButton = document.querySelector( '.button--start' );
 
-'use strict';
-
+'use strict'
 class Game {
-  constructor ( score, lives, isRunning, isMouse ) {
-    this.animals = ['🐭', '🐼', '🐻', '🦊', '🐱', '🐮', '🦁', '🐽', '🐨', '🐰', '🐯'];
-    this.hearts = document.querySelectorAll('.lives__heart');
+  constructor () {
+    this.animals = [ '🐭', '🐼', '🐻', '🦊', '🐱', '🐮', '🐭', '🦁', '🐽', '🐨', '🐰', '🐯', '🐭' ];
+    this.hearts = document.querySelector('.lives__heart');
     this.isMouse = false;
     this.isRunning = false;
-    this.score = 0;
+    this.levelValue = 1;
+    this.lives = 3;
+    this.scoreValue = 0;
     this.speed = 1500;
-    this.lives = 3;   
 
     this.holes = document.querySelectorAll( '.field__animal' );
+    this.HOLE = undefined;
+    this.ANIMAL = undefined;
   }
 
-  mouseChance() {
-    for (var i = 0; i < 11; i++) {
-      this.animals.push('🐭');
+  levelUp() {
+    this.levelValue ++;
+    level.innerHTML = this.levelValue;
+    console.log('level UP ' + this.levelValue);
+    this.speed -= 100;
+
+    
+  }
+
+  scorePrint() {
+    this.scoreValue = this.scoreValue + 10 ;
+    score.innerHTML = this.scoreValue;
+    console.log( 'score = ' + this.scoreValue);
+
+    level.classList.remove('level--animation');
+
+    if ( this.scoreValue % 50 === 0 ) {
+      this.levelUp();
+      
+      startAnimation();
     }
   }
 
-  inputScore() {
-    const scoreValue = document.querySelector('.score__value');
-
-    scoreValue.innerHTML = this.score;
-  }
-
-  fillLives() {
-    this.hearts.forEach( (heart) => heart.classList.add('lives__heart--fill') );
-    this.lives = this.hearts.length;
-  }
-
-  randomAnimals() {
-    let indexAnimal = Math.floor (Math.random() * this.animals.length ),
-        animal = this.animals[indexAnimal];
-
-    return animal;
+  randomAnimal() {
+    let indexAnimal = Math.floor( Math.random() * this.animals.length ),
+        randomAnimal = this.animals[indexAnimal];
+    
+    return randomAnimal;
   }
 
   randomHole() {
     let indexHole = Math.floor( Math.random() * this.holes.length ),
         randomHole = this.holes[indexHole];
-    
+
     return randomHole;
   }
 
-  createAnimal () {
-    let currentAnimal = this.randomAnimals(),        
-        currentHole = this.randomHole();
+  creatingAnimals() {
+    let currentHole = this.randomHole(),
+        clickOnAnimals = undefined;
 
-    currentHole.innerHTML = currentAnimal;
-    currentHole.classList.add('field__animal--create');
+    this.ANIMAL = this.randomAnimal();        
+    currentHole.classList.add( 'field__animal--create' );
+    
+    currentHole.innerHTML = this.ANIMAL;  
+    
+    this.HOLE = currentHole;
 
-    setTimeout( () => {
-      currentHole.classList.remove('field__animal--create');
-      currentHole.innerHTML = "";
-    }, this.speed);
+    clickOnAnimals = () => {      
+      this.HOLE.classList.add('field__animal--blood');
+      
+          if ( this.HOLE.innerHTML !== '🐭') {            
+            console.log( 'Жаба! ' + this.ANIMAL );
+          } else {
+            this.scorePrint();
+            console.log( 'Ура! Мышь! ' + this.ANIMAL );
+          }
+      }
 
-    this.Hole = currentHole;
-    this.Hole.style.background = '#111';
+      this.HOLE.addEventListener( 'click', clickOnAnimals  );
+      this.HOLE.classList.remove('field__animal--blood');
 
-    currentHole.addEventListener('click', () => console.log( currentAnimal ));
-
-
-    return currentHole;
+      setTimeout( () => {
+        this.HOLE.removeEventListener( 'click', clickOnAnimals, false );
+        currentHole.classList.remove( 'field__animal--create' );
+        this.HOLE.innerHTML = '';
+    }, this.speed*0.99 );    
   }
 
-
-  startGame () {
-    this.mouseChance();
-    this.randomAnimals();
-    this.randomHole();
-    this.createAnimal();
-    this.inputScore();
-
-
+  gameInterval() {
     setInterval( () => {
-      this.createAnimal();
-    }, this.speed);
+      this.creatingAnimals();
+    }, this.speed );    
+  }
+
+  startGame() {
+    this.gameInterval();
+
+    startAnimation();
   }
 }
 
-guideButton.addEventListener('click', showGuide);
-okButton.addEventListener('click', closeModal);
-startButton.addEventListener('click', startGame);
+guideButton.addEventListener( 'click', showGuide );
+okButton.addEventListener( 'click', closeModal );
+startButton.addEventListener( 'click', startGame );
 
-function startGame () {
+function startGame() {
   let game = new Game;
 
-  game.startGame ();
-  startButton.removeEventListener('click', startGame, false);
+  game.startGame();
+  startButton.removeEventListener( 'click', startGame, false );
 }
 
-function showGuide () {
-  guide.classList.remove('modal--invisible');
+function showGuide() {
+  guide.classList.remove( 'modal--invisible' );
 }
 
-function closeModal () {
-  guide.classList.add('modal--invisible');
+function closeModal() {
+  guide.classList.add( 'modal--invisible' );
 }
 
+function startAnimation() {
+  level.classList.add('level--animation');
+  console.log('start-animation')
+}

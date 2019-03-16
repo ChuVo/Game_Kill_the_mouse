@@ -303,7 +303,6 @@ font-size: 7rem;
   border: 1.5rem solid transparent;
   border-left: 2.7rem solid #27A8F3;
   text-align: center;
-  margin: 0 auto;
   display: inline-block;
   transform: translate(28%, 5%);
 }
@@ -356,7 +355,7 @@ font-size: 7rem;
   }
 
   .field {
-    width: 69rem;
+    width: 68rem;
   }
 
   .buttons {
@@ -366,39 +365,43 @@ font-size: 7rem;
   .button--start {
     width: 7rem;
   }
+
+  .player {
+    width: 37rem;
+    z-index: -1;
+  }
 }
 
 @media screen and (max-width: 850px)
 and (orientation: portrait) {
-  .filed__wrapper-holes {
-    justify-content: center;
-  }
-  
+
   .field__hole:nth-child(1) {
-    transform: translateX(-40%);
-  }
-   
-  .field__hole:nth-child(2) {
-    transform: translateX(40%);
+    transform: translateX(0);
   }
 
   .field__hole:nth-child(3) {
     margin-right: 42%;
-    transform: translateX(73%);
+    transform: translateX(110%);
    }
 
   .field__hole:nth-child(4) {
-    transform: translateX(-40%);
+    transform: translateX(0);
    }
    
    .field__hole:nth-child(5) {
-     transform: translateX(40%);
+     transform: translateX(0);
    }
 
 }
 
   @media screen and (max-width: 600px)
 and (orientation: portrait) {
+
+  .field__hole:nth-child(3) {
+    margin-right: 42%;
+    transform: translateX(100%);
+   }
+
    .modal {
     width: 60rem;
     height: 60rem;
@@ -415,6 +418,59 @@ and (orientation: portrait) {
   .modal__button {
     left: 29%;
   }
+}
+
+@media screen and (max-width: 470px) {
+  .field {
+    width: 60rem;
+  }
+
+  .field__hole:nth-child(3) {
+    margin-right: 42%;
+    transform: translateX(80%);
+   }
+
+  .modal__name {
+    font-size: 1.8rem;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 650px)
+and (orientation: landscape) {
+
+  .modal__title {
+    transform: translate(29%, 13%);
+  }
+
+  .modal__name {
+    font-size: 1.8rem;
+    width: 90%;
+  }
+
+  .modal__button {
+    bottom: 3%;
+}
+}
+
+@media screen and (max-width: 360px) {
+  .field {
+    width: 90%;
+  }
+
+  .modal {
+    width: 90%;
+  }
+
+  .modal__title {
+    width: 36rem;
+    transform: translate(23%, -24%);
+  }
+
+  .field__hole:nth-child(3) {
+    margin-right: 42%;
+    transform: translateX(73%);
+   }
 }
 
 

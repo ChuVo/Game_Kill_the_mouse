@@ -108,7 +108,7 @@ body {
 
 .level--animation {
   animation-duration: 2s;
-  animation-timing-function: ease-in;
+  animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
   animation-name: start-animation;
 }
@@ -117,8 +117,8 @@ body {
   from {
     font-size: 20rem;
     font-style: italic;
-    transform: translate(50vw, 50vh);
-    z-index: 999999999;
+    transform: translate(40vw, 40vh);
+    z-index: 999;
   }
 
   15% {
@@ -139,7 +139,7 @@ body {
 
   75% {
     font-size: 35rem;
-    transform: translate(50vw, 50vh);
+    transform: translate(40vw, 40vh);
   }
 
   to {

@@ -27,6 +27,8 @@ class Game {
     level.innerHTML = this.levelValue;
     console.log('level UP ' + this.levelValue);
     this.speed -= 100;
+
+    
   }
 
   scorePrint() {
@@ -34,8 +36,12 @@ class Game {
     score.innerHTML = this.scoreValue;
     console.log( 'score = ' + this.scoreValue);
 
+    level.classList.remove('level--animation');
+
     if ( this.scoreValue % 50 === 0 ) {
       this.levelUp();
+      
+      startAnimation();
     }
   }
 

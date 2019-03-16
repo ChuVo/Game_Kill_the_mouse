@@ -368,7 +368,6 @@ font-size: 7rem;
 
   .player {
     width: 37rem;
-    z-index: -1;
   }
 }
 
@@ -425,15 +424,6 @@ and (orientation: portrait) {
     width: 60rem;
   }
 
-  .field__hole {
-    height: 10.8rem;
-    width: 1.5rem;
-  }
-
-  .field__animal--create {
-    font-size: 4rem;
-  }
-
   .field__hole:nth-child(3) {
     margin-right: 42%;
     transform: translateX(80%);
@@ -445,20 +435,16 @@ and (orientation: portrait) {
   }
 }
 
-@media screen and (max-width: 650px)
+@media screen and (max-width: 570px)
 and (orientation: landscape) {
 
   .modal__title {
-    transform: translate(29%, 13%);
+    transform: translate(23%, 13%);
   }
 
   .modal__name {
     font-size: 1.8rem;
     width: 90%;
-  }
-
-  .modal__button {
-    bottom: 3%;
   }
 }
 

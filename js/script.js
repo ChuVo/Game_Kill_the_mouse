@@ -1,5 +1,4 @@
-const audio=document.querySelector("audio"),
-      gameTotal = document.querySelector( '.modal--total' ),
+const gameTotal = document.querySelector( '.modal--total' ),
       guide = document.querySelector( '.modal--guide' ),
       guideButton = document.querySelector( '.button--guide' ),
       level = document.querySelector( '.level__value' ),
@@ -8,11 +7,11 @@ const audio=document.querySelector("audio"),
       score = document.querySelector( '.score__value' ),
       startButton = document.querySelector( '.button--start' );
 
-let heartIndex = 0;
+let heartIndex = 0,
+    trackName = 'blues';
 
 widthScreen();
-audio.volume = 0.2;//level sound
-audio.classList.add('player');
+playTrack(trackName);
 
 'use strict'
 class Game {
@@ -38,8 +37,8 @@ class Game {
   levelUp() {
     this.levelValue ++;
     this.levelPrint();
-    console.log('level UP ' + this.levelValue);
     this.speed -= 200;
+    this. levelSound();
   }
   
   scorePrint() {
@@ -132,6 +131,7 @@ class Game {
   startGame() {
 
     levelAnimation();
+    this.levelSound();
     this.gameInterval();
   }
 
@@ -172,6 +172,40 @@ class Game {
       let sound = 'scoreNull';
 
       playSoundFx(sound);
+    }
+
+    trackName = 'blues';
+    playTrack(trackName);
+  }
+
+  levelSound() {
+    if (this.levelValue === 1) {
+      trackName = 'stage1';
+      playTrack(trackName);
+    }
+    if (this.levelValue === 2) {
+      trackName = 'stage2';
+      playTrack(trackName);
+    }
+    if (this.levelValue === 3) {
+      trackName = 'stage3';
+      playTrack(trackName);
+    }
+    if (this.levelValue === 4) {
+      trackName = 'stage4';
+      playTrack(trackName);
+    }
+    if (this.levelValue === 5) {
+      trackName = 'stage5';
+      playTrack(trackName);
+    }
+    if (this.levelValue === 6) {
+      trackName = 'stage6';
+      playTrack(trackName);
+    }
+    if (this.levelValue === 7) {
+      trackName = 'stage7';
+      playTrack(trackName);
     }
   }
 
@@ -252,9 +286,18 @@ okButton.forEach( (i) => i.addEventListener('click', playSoundButton) );
 startButton.addEventListener( 'click', playSoundButton );
 
 function playSoundButton() {
-  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/click.mp3" type="audio/mpeg"/></audio>';
+  document.querySelector('.speaker-simulation--button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/click.mp3" type="audio/mpeg"/></audio>';
 }
 
 function playSoundFx(sound) {
-  document.querySelector('.sound-button').innerHTML =`<audio autoplay="autoplay" class="click-button"><source src="/media/${sound}.mp3" type="audio/mpeg"/></audio>`;
+  document.querySelector('.speaker-simulation--button').innerHTML =`<audio autoplay="autoplay" class="click-button"><source src="/media/${sound}.mp3" type="audio/mpeg"/></audio>`;
+}
+
+function playTrack(trackName) {
+  let speakerSimulation = document.querySelector('.speaker-simulation--track');
+
+  speakerSimulation.innerHTML =`<audio class="player" controls="controls" autoplay="autoplay" loop="loop"><source src="/media/${trackName}.mp3" type="audio/mpeg"/></audio>`;
+  const audio = document.querySelector("audio");
+  audio.volume = .2;
+  audio.classList.add('player');
 }

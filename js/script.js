@@ -256,5 +256,5 @@ function playSoundButton() {
 }
 
 function playSoundFx(sound) {
-  document.querySelector('.sound-button').innerHTML =`'<audio autoplay="autoplay" class="click-button"><source src="/media/${sound}.mp3" type="audio/mpeg"/></audio>'`;
+  document.querySelector('.sound-button').innerHTML =`<audio autoplay="autoplay" class="click-button"><source src="/media/${sound}.mp3" type="audio/mpeg"/></audio>`;
 }

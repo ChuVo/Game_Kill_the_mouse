@@ -104,26 +104,14 @@ class Game {
 
     clickOnAnimals = () => {      
       this.HOLE.classList.add('field__animal--blood');
-      
-          if ( this.HOLE.innerHTML !== '🐭') {
-            this.deleteHeart();
-          }
-          if ( this.HOLE.innerHTML === '🐱') {
-            meow();
-          }
-          if ( this.HOLE.innerHTML === '🐽') {
-            pig();
-          }
-          if ( this.HOLE.innerHTML === '🐰') {
-            banny();
-          }          
-          if ( this.HOLE.innerHTML === '🦁') {
-            leo();
-          }
-           else {
-            this.scoreUp();
-          }
-      }
+      this.animalSound();
+
+      if ( this.HOLE.innerHTML !== '🐭') {
+        this.deleteHeart();
+        } else {
+          this.scoreUp();
+        }
+      };
 
       this.HOLE.addEventListener( 'click', clickOnAnimals  );
       this.HOLE.classList.remove('field__animal--blood');
@@ -176,6 +164,47 @@ class Game {
     this.printScore();
     gameTotal.classList.remove( 'modal--invisible' );
   }
+
+  animalSound() {
+    let sound = undefined;
+
+    if ( this.HOLE.innerHTML === '🐱') {
+      sound = 'meou';
+
+      playAnimalSound(sound);
+    }
+    if ( this.HOLE.innerHTML === '🐽') {
+      sound = 'pig';
+
+      playAnimalSound(sound);
+    }
+    if ( this.HOLE.innerHTML === '🐰') {
+      sound = 'banny';
+
+      playAnimalSound(sound);
+    }
+    if ( this.HOLE.innerHTML === '🐭' || this.HOLE.innerHTML === '🦊' ) {
+      sound = 'mouse';
+
+      playAnimalSound(sound);
+    }
+
+    if ( this.HOLE.innerHTML === '🐼' || this.HOLE.innerHTML === '🐻' || this.HOLE.innerHTML === '🐨' ) {
+      sound = 'koala';
+
+      playAnimalSound(sound);
+    }
+    if ( this.HOLE.innerHTML === '🐮') {
+      sound = 'bull';
+
+      playAnimalSound(sound);
+    }                  
+    if ( this.HOLE.innerHTML === '🦁' || this.HOLE.innerHTML === '🐯' ) {
+      sound = 'leo';
+
+      playAnimalSound(sound);
+    }
+  }
 }
 
 guideButton.addEventListener( 'click', showGuide );
@@ -216,22 +245,6 @@ function play() {
   document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/click.mp3" type="audio/mpeg"/></audio>';
 }
 
-function meow() {
-  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/meou.mp3" type="audio/mpeg"/></audio>';
-}
-
-function pig() {
-  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/pig.mp3" type="audio/mpeg"/></audio>';
-}
-
-function banny() {
-  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/banny.mp3" type="audio/mpeg"/></audio>';
-}
-
-function bull() {
-  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/bull.mp3" type="audio/mpeg"/></audio>';
-}
-
-function leo() {
-  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/leo.mp3" type="audio/mpeg"/></audio>';
+function playAnimalSound(sound) {
+  document.querySelector('.sound-button').innerHTML =`'<audio autoplay="autoplay" class="click-button"><source src="/media/${sound}.mp3" type="audio/mpeg"/></audio>'`;
 }

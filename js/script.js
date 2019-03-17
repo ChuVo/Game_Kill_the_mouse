@@ -9,9 +9,9 @@ const gameTotal = document.querySelector( '.modal--total' ),
 
 let heartIndex = 0,
     trackName = 'blues';
-
+const speakerSimulation = document.querySelector('.speaker-simulation--track');
 widthScreen();
-playTrack(trackName);
+playSoundTrack(trackName);
 
 'use strict'
 class Game {
@@ -148,10 +148,10 @@ class Game {
 
   stopGame() {
     if ( this.isRunning === false ) {
-      clearInterval( this.cycleGame );console.log('clearInterval; Runing-' + this.isRunning );
+      clearInterval( this.cycleGame );
+      startButton.addEventListener( 'click', startGame );
+      level.classList.remove('level--animation');
     }
-    startButton.addEventListener( 'click', startGame );
-    level.classList.remove('level--animation');
   }
 
   printScore() {
@@ -173,39 +173,37 @@ class Game {
 
       playSoundFx(sound);
     }
-
-    trackName = 'blues';
-    playTrack(trackName);
+    speakerSimulation.innerHTML = '';
   }
 
   levelSound() {
     if (this.levelValue === 1) {
       trackName = 'stage1';
-      playTrack(trackName);
+      playSoundTrack(trackName);
     }
     if (this.levelValue === 2) {
       trackName = 'stage2';
-      playTrack(trackName);
+      playSoundTrack(trackName);
     }
     if (this.levelValue === 3) {
       trackName = 'stage3';
-      playTrack(trackName);
+      playSoundTrack(trackName);
     }
     if (this.levelValue === 4) {
       trackName = 'stage4';
-      playTrack(trackName);
+      playSoundTrack(trackName);
     }
     if (this.levelValue === 5) {
       trackName = 'stage5';
-      playTrack(trackName);
+      playSoundTrack(trackName);
     }
     if (this.levelValue === 6) {
       trackName = 'stage6';
-      playTrack(trackName);
+      playSoundTrack(trackName);
     }
     if (this.levelValue === 7) {
       trackName = 'stage7';
-      playTrack(trackName);
+      playSoundTrack(trackName);
     }
   }
 
@@ -252,8 +250,17 @@ class Game {
 }
 
 guideButton.addEventListener( 'click', showGuide );
-okButton.forEach( (i) => i.addEventListener( 'click', closeModal )) ;
+guideButton.addEventListener( 'click', playSoundButton );
+
+okButton.forEach( (i) => i.addEventListener( 'click', closeModal) );
+okButton.forEach( (i) => i.addEventListener('click', playSoundButton) );
+okButtonTotal.addEventListener( 'click', () => {
+  trackName = 'blues';
+  playSoundTrack(trackName);
+});
+
 startButton.addEventListener( 'click', startGame );
+startButton.addEventListener( 'click', playSoundButton );
 
 function closeModal() {
   gameTotal.classList.add( 'modal--invisible' );
@@ -281,9 +288,7 @@ function widthScreen() {
   }
 }
 
-guideButton.addEventListener( 'click', playSoundButton );
-okButton.forEach( (i) => i.addEventListener('click', playSoundButton) );
-startButton.addEventListener( 'click', playSoundButton );
+
 
 function playSoundButton() {
   document.querySelector('.speaker-simulation--button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/click.mp3" type="audio/mpeg"/></audio>';
@@ -293,11 +298,12 @@ function playSoundFx(sound) {
   document.querySelector('.speaker-simulation--button').innerHTML =`<audio autoplay="autoplay" class="click-button"><source src="/media/${sound}.mp3" type="audio/mpeg"/></audio>`;
 }
 
-function playTrack(trackName) {
-  let speakerSimulation = document.querySelector('.speaker-simulation--track');
+function playSoundTrack(trackName) {
+  // const speakerSimulation = document.querySelector('.speaker-simulation--track');
 
   speakerSimulation.innerHTML =`<audio class="player" controls="controls" autoplay="autoplay" loop="loop"><source src="/media/${trackName}.mp3" type="audio/mpeg"/></audio>`;
-  const audio = document.querySelector("audio");
-  audio.volume = .2;
+  let audio = document.querySelector("audio");
+  
   audio.classList.add('player');
+  audio.volume = .2;
 }

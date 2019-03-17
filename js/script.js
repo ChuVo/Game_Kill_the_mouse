@@ -163,6 +163,16 @@ class Game {
   showTotal() {
     this.printScore();
     gameTotal.classList.remove( 'modal--invisible' );
+
+    if (this.scoreValue !== 0 ) {
+      let sound = 'score';
+
+      playSoundFx(sound);
+    } else {
+      let sound = 'scoreNull';
+
+      playSoundFx(sound);
+    }
   }
 
   animalSound() {
@@ -171,38 +181,38 @@ class Game {
     if ( this.HOLE.innerHTML === '🐱') {
       sound = 'meou';
 
-      playAnimalSound(sound);
+      playSoundFx(sound);
     }
     if ( this.HOLE.innerHTML === '🐽') {
       sound = 'pig';
 
-      playAnimalSound(sound);
+      playSoundFx(sound);
     }
-    if ( this.HOLE.innerHTML === '🐰') {
+    if ( this.HOLE.innerHTML === '🐰' || this.HOLE.innerHTML === '🦊' ) {
       sound = 'banny';
 
-      playAnimalSound(sound);
+      playSoundFx(sound);
     }
-    if ( this.HOLE.innerHTML === '🐭' || this.HOLE.innerHTML === '🦊' ) {
+    if ( this.HOLE.innerHTML === '🐭' ) {
       sound = 'mouse';
 
-      playAnimalSound(sound);
+      playSoundFx(sound);
     }
 
     if ( this.HOLE.innerHTML === '🐼' || this.HOLE.innerHTML === '🐻' || this.HOLE.innerHTML === '🐨' ) {
       sound = 'koala';
 
-      playAnimalSound(sound);
+      playSoundFx(sound);
     }
     if ( this.HOLE.innerHTML === '🐮') {
       sound = 'bull';
 
-      playAnimalSound(sound);
+      playSoundFx(sound);
     }                  
     if ( this.HOLE.innerHTML === '🦁' || this.HOLE.innerHTML === '🐯' ) {
       sound = 'leo';
 
-      playAnimalSound(sound);
+      playSoundFx(sound);
     }
   }
 }
@@ -237,14 +247,14 @@ function widthScreen() {
   }
 }
 
-guideButton.addEventListener( 'click', play );
-okButton.forEach( (i) => i.addEventListener('click', play) );
-startButton.addEventListener( 'click', play );
+guideButton.addEventListener( 'click', playSoundButton );
+okButton.forEach( (i) => i.addEventListener('click', playSoundButton) );
+startButton.addEventListener( 'click', playSoundButton );
 
-function play() {
+function playSoundButton() {
   document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/click.mp3" type="audio/mpeg"/></audio>';
 }
 
-function playAnimalSound(sound) {
+function playSoundFx(sound) {
   document.querySelector('.sound-button').innerHTML =`'<audio autoplay="autoplay" class="click-button"><source src="/media/${sound}.mp3" type="audio/mpeg"/></audio>'`;
 }

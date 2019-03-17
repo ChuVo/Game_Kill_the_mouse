@@ -109,12 +109,16 @@ class Game {
             this.deleteHeart();
           }
           if ( this.HOLE.innerHTML === '🐱') {
-            console.log('cat')
             meow();
           }
           if ( this.HOLE.innerHTML === '🐽') {
-            console.log('cat')
             pig();
+          }
+          if ( this.HOLE.innerHTML === '🐰') {
+            banny();
+          }          
+          if ( this.HOLE.innerHTML === '🦁') {
+            leo();
           }
            else {
             this.scoreUp();
@@ -218,4 +222,16 @@ function meow() {
 
 function pig() {
   document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/pig.mp3" type="audio/mpeg"/></audio>';
+}
+
+function banny() {
+  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/banny.mp3" type="audio/mpeg"/></audio>';
+}
+
+function bull() {
+  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/bull.mp3" type="audio/mpeg"/></audio>';
+}
+
+function leo() {
+  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/leo.mp3" type="audio/mpeg"/></audio>';
 }

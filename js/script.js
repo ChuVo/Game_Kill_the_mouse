@@ -112,6 +112,10 @@ class Game {
             console.log('cat')
             meow();
           }
+          if ( this.HOLE.innerHTML === '🐽') {
+            console.log('cat')
+            pig();
+          }
            else {
             this.scoreUp();
           }
@@ -210,4 +214,8 @@ function play() {
 
 function meow() {
   document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/meou.mp3" type="audio/mpeg"/></audio>';
+}
+
+function pig() {
+  document.querySelector('.sound-button').innerHTML ='<audio autoplay="autoplay" class="click-button"><source /><source src="/media/pig.mp3" type="audio/mpeg"/></audio>';
 }
